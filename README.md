@@ -38,7 +38,7 @@ Due to pandemic, everything moves online, and many people find it difficult to c
     - Debugging and Monitoring Websocket
   - Week 7 ( 3/22 - 3/28 ) & Week 8 ( 3/29 - 4/4 )
     - Allow for simultaneous utilization by multiple users
-  - Use Cognito to Handle User Pools
+    - Use Cognito to Handle User Pools
  ### 2. Advanced Version
 
   - Week 9 ( 4/5 - 4/11 )
