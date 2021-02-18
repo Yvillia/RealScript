@@ -18,7 +18,22 @@ Due to pandemic, everything moves online, and many people find it difficult to c
 
 ## Installation
 
+### webSocket connection
+
+#### webSocktet connection
+```
+npm install --save websocket http uuid
+```
+
 ## Features
+
+### webSocket connection
+
+
+Reference:
+  - https://www.npmjs.com/package/websocket
+  - https://nodejs.org/api/http.html
+  - https://www.npmjs.com/package/uuid
 
 
 ## Milestones
