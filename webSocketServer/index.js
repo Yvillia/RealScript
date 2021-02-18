@@ -31,7 +31,7 @@ wsServer.on('request', function(request) {
     console.log((new Date()) + ' Recieved a new connection from origin ' + request.origin + '.');
 
     // use 'echo-protocol' for testing
-    const connection = request.accept(null, requet.origin);
+    const connection = request.accept(null, request.origin);
     clients[userID] = connection;
     console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
     connection.on('message', function(message) {
@@ -40,7 +40,10 @@ wsServer.on('request', function(request) {
 
             // broadcasting message to all connected clients
             for (key in clients) {
-                clients[key].sendUTF(message.utf8Data);
+                // clients[key].sendUTF(message.utf8Data);
+                clients[key].sendUTF(
+                    JSON.stringify({type: 'ADD_MESSAGE', payload: 'hello'})
+                );
                 console.log('sent Message to: ', clients[key]);
             }
         }

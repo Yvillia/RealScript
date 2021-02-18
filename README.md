@@ -20,21 +20,28 @@ Due to pandemic, everything moves online, and many people find it difficult to c
 
 ### webSocket connection
 
-#### webSocktet connection
+#### webSocktet Server
+
 ```
 npm install --save websocket http uuid
+```
+
+#### webSocket Client
+
+```
+npm install --save websocket react react-dom react-scripts antd
 ```
 
 ## Features
 
 ### webSocket connection
 
-
 Reference:
   - https://www.npmjs.com/package/websocket
   - https://nodejs.org/api/http.html
   - https://www.npmjs.com/package/uuid
-
+  - https://www.w3.org/TR/websockets/
+  - https://www.w3.org/TR/websockets/
 
 ## Milestones
 
