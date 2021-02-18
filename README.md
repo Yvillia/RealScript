@@ -16,21 +16,22 @@ The goal of the project is to build a real-time document editor app. Users who v
 Due to pandemic, everything moves online, and many people find it difficult to collaborate with classmates, colleagues, or team members efficiently. Even though some online meeting platforms, like zoom, have the in-built whiteboard, it is found to have unexpected latency or strokes detected in the wrong position from time to time. As a result, having a separate real-time communication app would be beneficial for every online collaborator to communicate directly on board and quickly get other attention for feedback and approval - even though you are working in a different time zone, which is our prime intention, to provide persistent real-time communication between the client and server over a single TCP socket connection. And with the help of real-time collaborating, it can help users jot down and organize ideas faster. Also we would get a chance to get hands on the real experience of P2P networking project, to learn more about web socket, load balancer with nginx, and other networking tools, which are extremely common in any professional setting. 
 
 
-## Installation
+## Dev Setup
 
-### webSocket connection
+1. Verify you have `npm` installed on your machine. If you do not have it installed, install it using `npm install -g npm`
 
-#### webSocktet Server
+2. Install three npm modules - `websocket`, `http` and `uuid` - inside the `webSocketServer` folder by running `npm install --save websocket http uuid`.
 
-```
-npm install --save websocket http uuid
-```
+3. Install four npm modules - `websocket`, `react`, `react-dom` and `react-scripts` - inside the `webSocketClient` folder by running `npm install --save websocket react react-dom react-scripts`
 
-#### webSocket Client
+## Running Dev
 
-```
-npm install --save websocket react react-dom react-scripts antd
-```
+1. You will need to open 2 terminals to establish WebSocket connection
+  1) In terminal 1: Active the `WebSocket`server by running `node index.js` inside the `webSocketServer` folder.
+  2) In terminal 2: Run `npm start` inside the `webSocketClient` folder. 
+
+2. Open a browser and go to: `localhost:3000` to access the frontend
+
 
 ## Features
 
@@ -42,6 +43,7 @@ Reference:
   - https://www.npmjs.com/package/uuid
   - https://www.w3.org/TR/websockets/
   - https://www.w3.org/TR/websockets/
+  - https://blog.logrocket.com/websockets-tutorial-how-to-go-real-time-with-node-and-react-8e4693fbf843/
 
 ## Milestones
 
