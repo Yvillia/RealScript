@@ -1,0 +1,25 @@
+{
+  "name": "real_whiteboard",
+  "version": "1.0.0",
+  "description": "## Table of Contents - [Project Synopsis](https://github.com/nnrogers515/RealScript#project-synopsis) - [Project Purpose](https://github.com/nnrogers515/RealScript#project-purpose) - [Installation](https://github.com/nnrogers515/RealScript#installation) - [Features](https://github.com/nnrogers515/RealScript#features) - [Milestones](https://github.com/nnrogers515/RealScript#milestones) - [Tools](https://github.com/nnrogers515/RealScript#tools) - [Contributors](https://github.com/nnrogers515/RealScript#contributors)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnrogers515/RealScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnrogers515/RealScript/issues"
+  },
+  "homepage": "https://github.com/nnrogers515/RealScript#readme",
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "uuid": "^8.3.2",
+    "websocket": "^1.0.33"
+  }
+}
