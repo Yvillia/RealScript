@@ -27,8 +27,10 @@ Due to pandemic, everything moves online, and many people find it difficult to c
 ## Running Dev
 
 1. You will need to open 2 terminals to establish WebSocket connection
-  1) In terminal 1: Active the `WebSocket`server by running `node index.js` inside the `webSocketServer` folder.
-  2) In terminal 2: Run `npm start` inside the `webSocketClient` folder. 
+
+   1. In terminal 1: Active the `WebSocket`server by running `node index.js` inside the `webSocketServer` folder.
+  
+   2. In terminal 2: Run `npm start` inside the `webSocketClient` folder. 
 
 2. Open a browser and go to: `localhost:3000` to access the frontend
 
