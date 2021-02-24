@@ -6,12 +6,17 @@ import TextEditor from "../modules/textEditor";
 export default class Editor extends Component {
   render() {
     return (
-      <div className="Home">
-        <div className="navbar">
-            <ButtonRow />
-            <TextEditor />
+      <html>
+        <div className="Home">
+          <div className="navbar">
+              <ButtonRow />
+          </div>
+          <TextEditor />
         </div>
-      </div>
+        <div className="Footer">
+
+        </div>
+      </html>
     );
   }
 }

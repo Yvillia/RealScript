@@ -6,12 +6,17 @@ import InformationBody from "../modules/informationBlock";
 export default class Home extends Component {
   render() {
     return (
-      <div className="Home">
-        <div className="navbar">
-          <ButtonRow />
-          <InformationBody />
+      <html>
+        <div className="Home">
+          <div className="navbar">
+            <ButtonRow />
+          </div>
+            <InformationBody />
         </div>
-      </div>
+        <div className="Footer">
+
+        </div>
+      </html>
     );
   }
 }

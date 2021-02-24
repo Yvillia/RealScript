@@ -5,11 +5,16 @@ import "../assets/main.css";
 export default class Settings extends Component {
   render() {
     return (
-      <div className="Home">
-        <div className="navbar">
-          <ButtonRow />
+      <html>
+        <div className="Home">
+          <div className="navbar">
+            <ButtonRow />
+          </div>
         </div>
-      </div>
+        <div className="Footer">
+
+        </div>
+      </html>
     );
   }
 }
