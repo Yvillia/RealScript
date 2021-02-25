@@ -30,4 +30,6 @@ jobs:
         run: |
           cd ./realscript-app &&
           yarn install &&
-          yarn start
+          nohup yarn start &&
+          sleep 120 &&
+          echo Success
