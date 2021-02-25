@@ -28,5 +28,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          npm --prefix ./realscript-app install ./realscript-app
-          yarn --cwd realscript-app start
+          cd ./realscript-app &&
+          yarn install &&
+          yarn start
