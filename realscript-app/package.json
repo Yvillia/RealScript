@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "nohup node ./src/server.js & react-scripts start",
-    "start-server": "nohup node ./src/server.js",
+    "start-server": "nohup node ./src/server.js &",
     "start-app": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
