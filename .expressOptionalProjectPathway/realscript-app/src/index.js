@@ -1,0 +1,81 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './assets/index.css';
+import Routes from './routes';
+import Socket from './modules/socketClient.js';
+import reportWebVitals from './tests/reportWebVitals';
+// import http from 'http'
+// import uuid from 'uuid'
+const webSocketServerPort = 8000;
+const webSocketServer = require('websocket').server;
+const http = require('http');
+const uuid = require('uuid');
+
+// spining up websocket and http server
+const server = http.createServer(Routes).listen(8000, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    const host = server.address().address;
+    const port = server.address().port;
+    console.log(`Server listening on ${host}:${port}`);
+  }
+});
+
+server.listen(webSocketServerPort, function() {
+    console.log((new Date()) + 'Server is listening on port 8000');
+});
+
+// establish websocket server listening on port 8000
+const wsServer = new webSocketServer({
+    httpServer: server,
+    autoAcceptConnections: false
+});
+
+function originIsAllowed(origin) {
+    // TODO: put logic here to detect whether the specified origin is allowed. 
+    return true;
+};
+
+const clients = {};
+
+wsServer.on('request', function(request) {
+    if (!originIsAllowed(request.origin)) {
+        request.reject();
+        console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
+    }
+    var userID = uuid.v4();
+    console.log((new Date()) + ' Recieved a new connection from origin ' + request.origin + '.');
+
+    // use 'echo-protocol' for testing
+    const connection = request.accept(null, request.origin);
+    clients[userID] = connection;
+    console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
+    connection.on('message', function(message) {
+        if (message.type === 'utf8') {
+            console.log('Received Message: ', message.utf8Data);
+
+            // broadcasting message to all connected clients
+            for (var key in clients) {
+                // clients[key].sendUTF(message.utf8Data);
+                clients[key].sendUTF(
+                    JSON.stringify({type: 'ADD_MESSAGE', payload: 'hello'})
+                );
+                console.log('sent Message to: ', clients[key]);
+            }
+        }
+    })
+});
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Socket />
+    <Routes />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
