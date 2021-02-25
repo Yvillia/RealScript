@@ -27,5 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: 
+        run: |
+          yarn install
           yarn --cwd realscript-app start
