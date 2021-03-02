@@ -34,16 +34,76 @@ body {
   width: 100%;
 }
 
-.login {
-  display: inline-block;
-  position: absolute;
-  right: 0;
-}
-
 .MenuBtn {
   margin-right: 3%;
 }
 
 .MenuBtn:nth-child(6) {
   margin-left: 100%;
+}
+
+.logout {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+
+.account {
+  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  overflow-y: auto;
+  background-image: url("images/login_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.account__wrapper {
+  margin: auto;
+  padding: 0;
+} 
+
+.account__card {
+  background-color: rgba(255, 255, 255, 0.479);
+  margin: 30px auto auto auto;
+  padding: 50px 60px;
+  width: 500px;
+}
+
+.account__profile {
+  text-align: center;
+}
+
+.account__avatar {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.account__name {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 15px;
+  margin: 5px 0 5px 0px;
+}
+.account__sub :fullscreen{
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #656262;
+  font-size: 11px;
+  line-height: 15px;
+}
+
+@media screen and (max-width: 520px) {
+  .account__card {
+    padding: 35px 30px;
+  }
+}
+
+.account__btn {
+  width: 100%;
+  margin-right: 0;
 }
