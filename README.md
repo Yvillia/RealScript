@@ -19,8 +19,9 @@ Due to pandemic, everything moves online, and many people find it difficult to c
 ## Dev Setup
 
 1. Verify that you have yarn and/or npm installed on your device.
-   - You can get the downloadable [Here](https://nodejs.org/en/download/) for Nodejs and npm. If you already have npm ensure your node version is up to date (a helpful resource for managing node versions is [nvm](https://heynode.com/tutorial/install-nodejs-locally-nvm) which you can download via Linux/Mac Terminal or through utilizing Git Bash, WSL, or some other way on Windows.
-2. Clone/Download the Project locally and change directory into the downloaded directory (`cd /path/to/downloaded/folder`)
+   - You can get the downloadable [Here](https://nodejs.org/en/download/) for Nodejs and npm (recommend 14.15.1 for this project, or even numbers in general for longterm support). 
+   - If you already have npm ensure your node version is up to date (a helpful resource for managing node versions is [nvm](https://heynode.com/tutorial/install-nodejs-locally-nvm) which you can download via Linux/Mac Terminal or through utilizing Git Bash, WSL, or some other way on Windows.
+2. Clone/Download the Project locally and change directory into the downloaded directory `cd /path/to/downloaded/folder`
 3. Now simply run npm install or yarn install to get the necessary dependencies, if errors occur at this stage, it is likely that the node version you are using is not compatible (most likely too old), without much hassle you can change node version to ours through the command `nvm install 14.15.1` or if you already have installed this version of node, `nvm use 14.15.1` (this is assuming you have install nvm, if you haven't then you can download the 14.15.1 version in step 1).
 
 ## Running Dev
