@@ -1,12 +1,16 @@
-const webSocketServerPort = 8000;
+// spining up websocket and http server
 const webSocketServer = require('websocket').server;
 const http = require('http');
 const uuid = require('uuid');
+const webSocketServerPort = 8000;
 
-// spining up websocket and http server
-const server = http.createServer();
+const server = new http.createServer((req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Connected Properly!\n');
+});
+
 server.listen(webSocketServerPort, function() {
-    console.log((new Date()) + 'Server is listening on port 8000');
+    console.log((new Date()) + 'Server is listening on port ' + webSocketServerPort);
 });
 
 // establish websocket server listening on port 8000
@@ -35,11 +39,11 @@ wsServer.on('request', function(request) {
     clients[userID] = connection;
     console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients));
     connection.on('message', function(message) {
-        if (message.type == 'utf8') {
+        if (message.type === 'utf8') {
             console.log('Received Message: ', message.utf8Data);
 
             // broadcasting message to all connected clients
-            for (key in clients) {
+            for (var key in clients) {
                 // clients[key].sendUTF(message.utf8Data);
                 clients[key].sendUTF(
                     JSON.stringify({type: 'ADD_MESSAGE', payload: 'hello'})
@@ -49,5 +53,3 @@ wsServer.on('request', function(request) {
         }
     })
 });
-
-
