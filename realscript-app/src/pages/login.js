@@ -61,7 +61,7 @@ export default class Login extends Component {
     return (
       <React.Fragment>
         <div className="container-fluid">
-          {this.showLoginSection()}
+          {username ? <Redirect to={"/Home"} /> : this.showLoginSection()}
         </div>
         <Footer />
       </React.Fragment>
