@@ -18,22 +18,17 @@ Due to pandemic, everything moves online, and many people find it difficult to c
 
 ## Dev Setup
 
-1. Verify you have `npm` installed on your machine. If you do not have it installed, install it using `npm install -g npm`
-
-2. Install three npm modules - `websocket`, `http` and `uuid` - inside the `webSocketServer` folder by running `npm install --save websocket http uuid`.
-
-3. Install four npm modules - `websocket`, `react`, `react-dom` and `react-scripts` - inside the `webSocketClient` folder by running `npm install --save websocket react react-dom react-scripts`
+1. Verify that you have yarn and/or npm installed on your device.
+   - You can get the downloadable [Here](https://nodejs.org/en/download/) for Nodejs and npm. If you already have npm ensure your node version is up to date (a helpful resource for managing node versions is [nvm](https://heynode.com/tutorial/install-nodejs-locally-nvm) which you can download via Linux/Mac Terminal or through utilizing Git Bash, WSL, or some other way on Windows.
+2. Clone/Download the Project locally and change directory into the downloaded directory (`cd /path/to/downloaded/folder`)
+3. Now simply run npm install or yarn install to get the necessary dependencies, if errors occur at this stage, it is likely that the node version you are using is not compatible (most likely too old), without much hassle you can change node version to ours through the command `nvm install 14.15.1` or if you already have installed this version of node, `nvm use 14.15.1` (this is assuming you have install nvm, if you haven't then you can download the 14.15.1 version in step 1).
 
 ## Running Dev
 
-1. You will need to open 2 terminals to establish WebSocket connection
-
-   1. In terminal 1: Active the `WebSocket`server by running `node index.js` inside the `webSocketServer` folder.
-  
-   2. In terminal 2: Run `npm start` inside the `webSocketClient` folder. 
-
-2. Open a browser and go to: `localhost:3000` to access the frontend
-
+1. Execute `yarn start` or `npm run start` to start both the backend server as well as the frontend. 
+2. Alternative: If you wish to run both frontend and backend as separate foreground processes, then open up two separate shells within the downloaded project folder, and in the first call `yarn start-server` or `npm run start-server` for the backend, and in the second call `yarn start-app` or `npm run start-app` for the frontend. 
+3. You can then search `localhost:3000` or `127.0.0.1:3000` in your browser to view the frontend (the backend is likewise found at port 8000, so replace 3000 with 8000 to find that endpoint but it is essentially empty!).
+4. Check out the App!
 
 ## Features
 
