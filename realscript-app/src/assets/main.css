@@ -6,6 +6,7 @@ html {
 }
 
 body {
+  margin-top : 0px;
   /* margin: 0;
   padding: 0;
   min-height: 100%;
@@ -55,21 +56,24 @@ body {
   min-height: 100vh;
   display: flex;
   overflow-y: auto;
-  background-image: url("images/login_bg.jpg");
+  background-image: url("images/login_bg.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 65% 85%;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .account__wrapper {
   margin: auto;
   padding: 0;
+  background-color: #343a4005;
 } 
 
 .account__card {
-  background-color: rgba(255, 255, 255, 0.479);
-  margin: 30px auto auto auto;
-  padding: 50px 60px;
-  width: 500px;
+  background-color: rgba(255, 255, 255, 0.116);
+  margin: 30 auto auto auto;
+  padding: 70px 50px;
+  width: 400px;
 }
 
 .account__profile {
@@ -81,6 +85,7 @@ body {
   width: 64px;
   border-radius: 50%;
   overflow: hidden;
+  background-color: #343a40;
 }
 .account__name {
   font-size: 11px;
@@ -89,7 +94,7 @@ body {
   line-height: 15px;
   margin: 5px 0 5px 0px;
 }
-.account__sub :fullscreen{
+.account__sub {
   margin-top: 0;
   margin-bottom: 10px;
   color: #656262;
@@ -106,4 +111,5 @@ body {
 .account__btn {
   width: 100%;
   margin-right: 0;
+  font-size: 50%;
 }
