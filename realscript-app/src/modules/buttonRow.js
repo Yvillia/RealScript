@@ -15,15 +15,15 @@ class ButtonRow extends React.Component {
           <Navbar bg="dark" variant="dark">
             <Nav className="buttons">
               <span className="innerRow">
-                {this.renderButton("Home", "/")}
+                {this.renderButton("Home", "/Home")}
                 {this.renderButton("Editor", "/Editor")}
                 {this.renderButton("Profile", "/Profile")}
                 {this.renderButton("Settings", "/Settings")}
               </span>
             </Nav>
-            <Nav className="login">
+            <Nav className="logout">
                 <span>
-                  {this.renderButton("Login", "/Login")}
+                  {this.renderButton("Logout", "/")}
                 </span>
             </Nav>
           </Navbar>
