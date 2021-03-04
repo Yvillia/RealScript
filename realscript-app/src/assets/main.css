@@ -18,11 +18,71 @@ body {
   width: 100%;
 }
 
+.chatButton {
+  background-image: url(images/chatIcon.png);
+  background-repeat: no-repeat;
+  background-size: 75px 75px;
+  position: absolute;
+  border: 1px rgb(133, 125, 125);
+  height: 75px;
+  width: 75px;
+  border-radius: 100%;
+  padding: 30px;
+  z-index: 2;
+	margin-left: -6vw;
+  border-right: none;
+}
+
+.chat-list {
+  height: 88% !important;
+  display: flex;
+  /* flex-direction: column; */
+  position: fixed;
+  /* border-left: 2px solid; */
+  border-top: 2px solid;
+  border-radius: 3px;
+  bottom: 0;
+  right: -1.3em;
+  background-color: black;
+  z-index: 1;
+}
+
+.chat-sep {
+  /* Courtesy of https://uigradients.com/#Atlas */
+  background: #FEAC5E;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #9c3734);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4BC0C8, #C779D0, #9c3734); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.chatStyle {
+  resize: none;
+  overflow-y: auto;
+  border: #343a40;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.chat-title {
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: large;
+}
+
 .editorArea {
   width: 80%;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3%;
+  z-index: 0;
+}
+
+.editorSplit {
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .footer {

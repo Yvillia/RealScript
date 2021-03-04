@@ -13,7 +13,7 @@ export default class Profile extends Component {
             <ButtonRow user={global.name}/>
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </html>
     );
   }

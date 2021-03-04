@@ -16,11 +16,11 @@ class Routes extends React.Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/" exact component={Login} />
-                    <Route path="/Editor" exact component={Editor} />
-                    <Route path="/Profile" exact component={Profile} />
-                    <Route path="/Settings" exact component={Settings} />
-                    <Route path="/Home" exact component={Home} />
+                    <Route path="/" exact render={(props) => <Login ws = {this.props.ws} />} />
+                    <Route path="/Editor" exact render={(props) => <Editor ws = {this.props.ws} />} />
+                    <Route path="/Profile" exact render={(props) => <Profile ws = {this.props.ws} />} />
+                    <Route path="/Settings" exact render={(props) => <Settings ws = {this.props.ws} />} />
+                    <Route path="/Home" exact render={(props) => <Home ws = {this.props.ws} />} />
                 </Switch>
             </Router>
         )

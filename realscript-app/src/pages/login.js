@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import "../assets/main.css";
-import Footer from "../modules/footer"
 import Identicon from 'react-identicons';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { Redirect } from "react-router-dom";
-
-const client = new W3CWebSocket('ws://127.0.0.1:8000');
-
 export default class Login extends Component {
 
   constructor(props) {
@@ -28,7 +24,7 @@ export default class Login extends Component {
       this.setState({
         ...data
       }, () => {
-        client.send(JSON.stringify({
+        this.props.ws.send(JSON.stringify({
           ...data,
           type: "userevent"
         }));

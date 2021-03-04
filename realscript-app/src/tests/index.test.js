@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Route } from 'react-router';
+import React from "react";
 import Routes from '../routes';
 import Socket from '../modules/socketClient';
 
