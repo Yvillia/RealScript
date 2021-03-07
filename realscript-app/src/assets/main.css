@@ -1,3 +1,9 @@
+* {
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
 
 html {
   margin-top: -0.5em;
@@ -26,7 +32,7 @@ html {
   border-radius: 100%;
   padding: 30px;
   z-index: 2;
-	margin-left: -4em;
+	margin-left: -4.3em;
   border-right: none;
 }
 
@@ -91,6 +97,13 @@ html {
   height: 100px;
   box-shadow: 50vw;
 } */
+
+.InformationBody {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2%;
+}
 
 .innerRow {
   display: flex;
@@ -187,4 +200,18 @@ html {
   width: 100%;
   margin-right: 0;
   font-size: 50%;
+}
+
+.container-fluid {
+  position: sticky;
+  margin-top: -1em;
+  height: 105vh;
+}
+
+.login {
+  position: fixed;
+  width: 97%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
