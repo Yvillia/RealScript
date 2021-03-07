@@ -12,7 +12,6 @@ import Settings from "./pages/settings.js"
 import Login from "./pages/login.js"
 
 class Routes extends React.Component {
-    
     render() {
         return (
             <Router>

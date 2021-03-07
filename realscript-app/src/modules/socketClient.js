@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import 'websocket';
-import { client } from "../index";
-
-export default class Socket extends Component {
-    constructor(props) {
-        super(props);
-    }
+import React from 'react';
+import { w3cwebsocket } from "websocket";
+const URL = 'ws://0.0.0.0:8080';
+var client = new w3cwebsocket(URL, 'chatting');
+class Socket extends React.Component {
 
     componentDidMount() {
         client.onopen = () => {
@@ -19,4 +16,9 @@ export default class Socket extends Component {
             </p>
         );
     };
+};
+
+export {
+    client,
+    Socket,
 }

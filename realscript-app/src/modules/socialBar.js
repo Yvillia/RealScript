@@ -6,11 +6,11 @@ import MemberList from './memberList';
 import ResponseArea from './responseArea';
 import "../assets/main.css";
 
-export const SocialBar = ({ input_width }) => {
+export const SocialBar = ({ user, input_width }) => {
     const [pos, setPos] = useState(0);
 
     const chatButton = () => {
-        if (pos == 0) setPos(input_width);
+        if (pos === 0) setPos(input_width);
         else setPos(0);
     }
 
@@ -43,7 +43,7 @@ export const SocialBar = ({ input_width }) => {
                 </ListItem>
                 <ListItem button>
                 {/* <div> */}
-                    <ChatClient/>
+                    <ChatClient user={user}/>
                 {/* </div> */}
                 </ListItem>
                 </List>

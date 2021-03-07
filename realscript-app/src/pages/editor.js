@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../assets/main.css";
 import ButtonRow from "../modules/buttonRow";
 import TextEditor from "../modules/textEditor";
-import Footer from "../modules/footer";
+// import Footer from "../modules/footer";
 import "../pages/login.js";
 import { SocialBar } from "../modules/socialBar";
 
@@ -19,7 +19,7 @@ export default class Editor extends Component {
           <span className="editorSplit">
             <TextEditor />
             <div className="chatSplit">
-              <SocialBar input_width="325" />
+              <SocialBar user={global.name} input_width="325" />
             </div>
           </span>
           {/* <Footer /> */}

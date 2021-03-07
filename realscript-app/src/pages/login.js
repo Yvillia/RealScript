@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../assets/main.css";
 import Identicon from 'react-identicons';
 import { Redirect } from "react-router-dom";
-import { client } from "../index";
+import { client } from "../modules/socketClient";
 export default class Login extends Component {
 
   constructor(props) {
@@ -49,7 +49,6 @@ export default class Login extends Component {
       </div>
     </div>
   )
-  
   render() {
     const {
       username

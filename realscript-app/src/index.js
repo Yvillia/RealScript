@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/index.css';
 import Routes from './routes';
-import Socket from './modules/socketClient.js';
-import { w3cwebsocket } from "websocket";
 import reportWebVitals from './tests/reportWebVitals';
-export var client = new w3cwebsocket('ws://localhost:8000/');
+import { Socket } from './modules/socketClient';
 
 ReactDOM.render(
   <React.StrictMode>

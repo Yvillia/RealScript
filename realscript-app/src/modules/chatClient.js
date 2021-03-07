@@ -1,59 +1,45 @@
 import React from 'react'
 import "../assets/main.css";
 import ChatArea from './chatComp';
-import { client } from "websocket";
+import { client } from "../modules/socketClient";
+import { w3cwebsocket } from "websocket";
 import "../pages/login.js";
-const URL = 'ws://127.0.0.1:8000'
+const URL = 'ws://127.0.0.1:8080';
 
 export default class ChatClient extends React.Component {
   state = {
-    name: global.user,
+    name: this.props.user,
   }
-
-  ws = new WebSocket(URL);
+  ws = client;
 
   componentDidMount() {
+
     this.ws.onopen = () => {
       console.log('Connected to WebSocket');
     }
 
-    this.ws.onmessage = event => {
-      // on receiving a message, add it to the list of messages
-      const msg = JSON.parse(event.data)
-      this.addHistory(msg)
-    }
-
     this.ws.onclose = () => {
       console.log('Disconnected From WebSocket');
-      this.setState({ ws: new WebSocket(URL)})
+      this.ws = new w3cwebsocket(URL, 'chatting');
     }
   }
 
-  // Records History
-  addHistory = msg =>
-    this.setState(state => ({ msgs: [msg, ...state.msgs] }))
-
   sendMessage = msg => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const message = { name: this.state.name, message: msg }
-    this.ws.send(JSON.stringify(message))
-    this.addHistory(message)
+    const messg = { name: this.state.name, message: msg }
+    if (this.ws.readyState === this.ws.OPEN) { 
+      this.ws.send(JSON.stringify(messg));
+    } else {
+      console.log("Still Connecting");
+    }
   }
 
   render() {
     return (
-      // <div>
         <ChatArea
+          user = {this.props.user}
           sendMessage = {messageString => this.sendMessage(messageString)}
         />
-        /*{ {this.state.messages.map((message, index) =>
-          <ChatMessage
-            key={index}
-            message={message.message}
-            name={message.name}
-          />,
-        )} }*/
-      // </div>
     )
   }
 }
