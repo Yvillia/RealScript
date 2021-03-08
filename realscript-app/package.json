@@ -19,16 +19,16 @@
     "react-dom": "^17.0.1",
     "react-identicons": "^1.2.5",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.3.1",
+    "react-scripts": "4.0.3",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1",
     "websocket": "^1.0.33"
   },
   "scripts": {
-    "start": "nohup node ./src/server.js & react-scripts start",
+    "start": "nohup node ./src/server.js & serve -s build",
     "start-server": "node ./src/server.js",
     "start-app": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "nohup node ./src/server.js & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
