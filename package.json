@@ -1,0 +1,19 @@
+{
+  "name": "realscript",
+  "version": "1.0.0",
+  "description": "CS296-41 Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd realscript-app; yarn install; yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnrogers515/RealScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnrogers515/RealScript/issues"
+  },
+  "homepage": "https://github.com/nnrogers515/RealScript#readme"
+}
