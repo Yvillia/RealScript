@@ -1,10 +1,16 @@
 // spining up websocket and http server
 const webSocketServer = require('websocket').server;
-const http = require('http');
+const https = require('https');
 const uuid = require('uuid');
+const fs = require('fs');
 const webSocketServerPort = 8080;
 
-const server = new http.createServer((req, res) => {
+const options = {
+    key: fs.readFileSync('./key.key'),
+    cert: fs.readFileSync('./cert.crt')
+};
+
+const server = new https.createServer(options, (req, res) => {
     console.log((new Date()) + ' Received request for ' + req.url);
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Connected Properly!\n');
