@@ -1,7 +1,7 @@
 import React from 'react'
 import "../assets/main.css";
 import { w3cwebsocket } from "websocket";
-const URL = 'wss://127.0.0.1:8080';
+const URL = 'wss://0.0.0.0:8080';
 
 export default class MemberList extends React.Component {
     state = {

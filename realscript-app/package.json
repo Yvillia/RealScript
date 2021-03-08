@@ -25,7 +25,7 @@
     "websocket": "^1.0.33"
   },
   "scripts": {
-    "start": "export HTTPS=true&&SSL_CRT_FILE=cert.crt && SSL_KEY_FILE=key.key && nohup node ./src/server.js & react-scripts start",
+    "start": "export HTTPS=true && SSL_CRT_FILE=cert.crt && SSL_KEY_FILE=key.key && nohup node ./src/server.js & react-scripts start",
     "start-server": "node ./src/server.js",
     "start-app": "export HTTPS=true && SSL_CRT_FILE=cert.crt && SSL_KEY_FILE=key.key &&react-scripts start",
     "build": "react-scripts build",

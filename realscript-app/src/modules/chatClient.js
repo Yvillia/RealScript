@@ -4,7 +4,7 @@ import ChatArea from './chatComp';
 import { client } from "../modules/socketClient";
 import { w3cwebsocket } from "websocket";
 import "../pages/login.js";
-const URL = 'wss://127.0.0.1:8080';
+const URL = 'wss://0.0.0.0:8080';
 
 export default class ChatClient extends React.Component {
   state = {
