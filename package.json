@@ -4,7 +4,7 @@
   "description": "CS296-41 Project",
   "main": "index.js",
   "scripts": {
-    "start": "cd realscript-app; yarn install; yarn start"
+    "start": "yarn --cwd realscript-app install && yarn --cwd realscript-app start"
   },
   "repository": {
     "type": "git",
