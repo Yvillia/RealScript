@@ -14,6 +14,7 @@
     "concurrently": "^6.0.0",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
+    "husky": "^5.1.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.0",
     "react-dom": "^17.0.1",
@@ -32,7 +33,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "eslint": "eslint --config ./.eslintrc --ext .js,.jsx,src/",
-    "format": "prettier --config .prettierrc --write \"**/*.{js,css,html,md}\""
+    "format": "prettier --config .prettierrc --write \"**/*.{js,css,html,md,json}\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run eslint && yarn run format"
+    }
   },
   "eslintConfig": {
     "extends": [
