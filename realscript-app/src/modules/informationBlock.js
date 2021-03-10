@@ -6,7 +6,7 @@ class InformationBody extends React.Component {
   render () {
     return (
       <div className="InformationBody">
-        <header className="head">
+        {/* <body className="head"> */}
           <Card>
             <Card.Body>
               <Card.Title>Home Page Section</Card.Title>
@@ -24,7 +24,7 @@ class InformationBody extends React.Component {
               </Card.Text>
             </Card.Body>
           </Card>
-        </header>
+        {/* </body> */}
       </div>
     );
   }

@@ -12,7 +12,7 @@ class ButtonRow extends React.Component {
     render() {
       return (
         <div className="buttonRow">
-          <Navbar bg="dark" variant="dark">
+          <Navbar className="NaviBar" bg="dark" variant="dark">
             <Nav className="buttons">
               <span className="innerRow">
                 {this.renderButton("Home", "/Home")}
@@ -27,7 +27,7 @@ class ButtonRow extends React.Component {
                 </span>
             </Nav>
           </Navbar>
-          <Navbar bg="dark" variant="dark">
+          <Navbar className= "NaviBar" bg="dark" variant="dark">
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>

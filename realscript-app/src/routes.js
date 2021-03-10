@@ -19,7 +19,7 @@ class Routes extends React.Component {
                     <Route path="/" exact component={Login} />
                     <Route path="/Editor" exact component={Editor} />
                     <Route path="/Profile" exact component={Profile} />
-                    <Route path="/Settings" exact component={Settings} />
+                    <Route path="/Settings" exact component={Settings}/>
                     <Route path="/Home" exact component={Home} />
                 </Switch>
             </Router>

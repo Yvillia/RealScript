@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import 'websocket';
-import { w3cwebsocket } from 'websocket';
-
-const client = new w3cwebsocket('ws://127.0.0.1:8000');
-
-export default class Socket extends Component {
+import React from 'react';
+import { w3cwebsocket } from "websocket";
+const URL = 'ws://0.0.0.0:8080';
+var client = new w3cwebsocket(URL, 'chatting');
+class Socket extends React.Component {
 
     componentDidMount() {
         client.onopen = () => {
@@ -14,8 +12,13 @@ export default class Socket extends Component {
     render() {
         return (
             <p>
-                {console.log("Websocket is Functioning")}
+                { console.log("Waiting for Connection... ") }
             </p>
         );
     };
+};
+
+export {
+    client,
+    Socket,
 }
