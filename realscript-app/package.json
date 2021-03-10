@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "chokidar": "^2.1.8",
     "concurrently": "^6.0.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "husky": "^5.1.3",
