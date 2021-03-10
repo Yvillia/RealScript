@@ -15,8 +15,8 @@ class Socket extends React.Component {
                 { console.log("Waiting for Connection... ") }
             </p>
         );
-    };
-};
+    }
+}
 
 export {
     client,
