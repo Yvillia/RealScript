@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/index.css';
 import Routes from './routes';
-import Socket from './modules/socketClient.js';
 import reportWebVitals from './tests/reportWebVitals';
+import { Socket } from './modules/socketClient';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Socket />
-    <Routes />
+    <Socket/>
+    <Routes/>
   </React.StrictMode>,
   document.getElementById('root')
 );
