@@ -20,7 +20,7 @@ export default class ResponseArea extends React.Component {
     this.ws.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
       const msg = JSON.parse(event.data).message;
-      this.addHistory(msg);
+      if (msg && msg.trim()) this.addHistory(msg);
     };
 
     this.ws.onclose = () => {

@@ -19,7 +19,7 @@ export default class MemberList extends React.Component {
     this.ws.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
       const usr = JSON.parse(event.data).name;
-      this.addUser(usr);
+      if (usr && usr.trim()) this.addUser(usr);
     };
 
     this.ws.onclose = () => {

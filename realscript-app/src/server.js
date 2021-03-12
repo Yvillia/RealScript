@@ -3,6 +3,7 @@ const webSocketServer = require("websocket").server;
 const http = require("http");
 const uuid = require("uuid");
 const webSocketServerPort = 8080;
+var text = "";
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -67,6 +68,23 @@ wsServer.on("request", function (request) {
         // );
         // console.log('sent Message to: ', clients[key]);
       }
+    }
+  });
+
+  connection.on("update", function (update) {
+    if (update.type === "utf8") {
+      console.log("Received Message: " + update.utf8Data);
+      // if (txt !== update) {
+      txt = update;
+      // broadcasting message to all connected clients
+      for (var key in clients) {
+        clients[key].sendUTF(update.utf8Data);
+        // clients[key].sendUTF(
+        //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
+        // );
+        // console.log('sent Message to: ', clients[key]);
+      }
+      // }
     }
   });
 });
