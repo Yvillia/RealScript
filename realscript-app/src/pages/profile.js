@@ -10,7 +10,7 @@ export default class Profile extends Component {
       <html>
         <div className="Home">
           <div className="navbar">
-            <ButtonRow user={global.name}/>
+            <ButtonRow user={global.name} />
           </div>
         </div>
         {/* <Footer /> */}

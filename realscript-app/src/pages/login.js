@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import "../assets/main.css";
-import Identicon from 'react-identicons';
+import Identicon from "react-identicons";
 import { Redirect } from "react-router-dom";
 import { client } from "../modules/socketClient";
 export default class Login extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       currentUsers: [],
       userActivity: [],
       username: null,
-      text: ''
+      text: ""
     };
   }
 
@@ -21,16 +20,21 @@ export default class Login extends Component {
       const data = {
         username
       };
-      this.setState({
-        ...data
-      }, () => {
-        client.send(JSON.stringify({
-          ...data,
-          type: "userevent"
-        }));
-      });
+      this.setState(
+        {
+          ...data
+        },
+        () => {
+          client.send(
+            JSON.stringify({
+              ...data,
+              type: "userevent"
+            })
+          );
+        }
+      );
     }
-  }
+  };
 
   showLoginSection = () => (
     <div className="login">
@@ -42,17 +46,27 @@ export default class Login extends Component {
               <p className="account__name">Hello, user!</p>
               <p className="account__sub">Join to edit the document</p>
             </div>
-            <input name="username" ref={(input) => { this.username = input; }} className="form-control" />
-            <button type="button" onClick={() => this.logInUser()} className="btn btn-primary account__btn">Join</button>
+            <input
+              name="username"
+              ref={(input) => {
+                this.username = input;
+              }}
+              className="form-control"
+            />
+            <button
+              type="button"
+              onClick={() => this.logInUser()}
+              className="btn btn-primary account__btn"
+            >
+              Join
+            </button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
   render() {
-    const {
-      username
-    } = this.state;
+    const { username } = this.state;
     global.name = username;
     return (
       <React.Fragment>
