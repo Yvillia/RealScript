@@ -1,7 +1,7 @@
 import React from "react";
 import { w3cwebsocket } from "websocket";
 const URL = "ws://0.0.0.0:8080";
-var client = new w3cwebsocket(URL, "chatting");
+const client = new w3cwebsocket(URL, "chatting");
 class Socket extends React.Component {
   componentDidMount() {
     client.onopen = () => {

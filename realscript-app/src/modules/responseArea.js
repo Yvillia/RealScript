@@ -34,8 +34,8 @@ export default class ResponseArea extends React.Component {
   }
 
   buildMessage() {
-    var responseCollection = "";
-    for (var msg of this.state.msgs) {
+    let responseCollection = "";
+    for (const msg of this.state.msgs) {
       responseCollection += msg + "\n";
     }
     return responseCollection;

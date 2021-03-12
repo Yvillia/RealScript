@@ -38,8 +38,8 @@ export default class MemberList extends React.Component {
   };
 
   buildUsers() {
-    var responseCollection = "";
-    for (var usr of this.state.user_list) {
+    let responseCollection = "";
+    for (const usr of this.state.user_list) {
       responseCollection += usr + "\n";
     }
     return responseCollection;
