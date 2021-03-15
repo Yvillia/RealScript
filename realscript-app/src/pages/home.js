@@ -10,13 +10,13 @@ export default class Home extends Component {
     return (
       <html>
         <body>
-        <div className="Home">
-          <div className="navbar">
-            <ButtonRow user={global.name}/>
-          </div>
+          <div className="Home">
+            <div className="navbar">
+              <ButtonRow user={global.name} />
+            </div>
             <InformationBody />
-        </div>
-        {/* <Footer /> */}
+          </div>
+          {/* <Footer /> */}
         </body>
       </html>
     );

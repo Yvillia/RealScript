@@ -4,7 +4,8 @@
   "description": "CS296-41 Project",
   "main": "index.js",
   "scripts": {
-    "start": "yarn --cwd realscript-app install && yarn --cwd realscript-app start"
+    "start": "yarn --cwd realscript-app install && yarn --cwd realscript-app start",
+    "validate": "bash pre-commit.sh"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/nnrogers515/RealScript/issues"
   },
-  "homepage": "https://github.com/nnrogers515/RealScript#readme"
+  "homepage": "https://github.com/nnrogers515/RealScript#readme",
+  "dependencies": {
+    "husky": "^5.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bash pre-commit.sh"
+    }
+  }
 }

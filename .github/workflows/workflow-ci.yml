@@ -30,4 +30,7 @@ jobs:
         run: |
           cd ./realscript-app &&
           yarn install &&
-          yarn test 
+          yarn test
+          
+      - name: Run eslint
+        run: yarn validate

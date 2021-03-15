@@ -1,9 +1,9 @@
-import '../assets/main.css';
-import React from 'react';
-import Form from 'react-bootstrap/Form';
+import "../assets/main.css";
+import React from "react";
+import Form from "react-bootstrap/Form";
 
 class TextEditor extends React.Component {
-  render () {
+  render() {
     return (
       <div className="editorArea">
         <Form.Group controlId="exampleForm.ControlTextarea1">

@@ -7,9 +7,9 @@ html::-webkit-scrollbar {
 
 html {
   margin-top: -0.5em;
-  background: #403A3E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #BE5869, #403A3E);
+  background: #403a3e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #be5869, #403a3e); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #be5869, #403a3e);
 }
 
 .buttonRow {
@@ -32,7 +32,7 @@ html {
   border-radius: 100%;
   padding: 30px;
   z-index: 2;
-	margin-left: -4.3em;
+  margin-left: -4.3em;
   border-right: none;
 }
 
@@ -48,9 +48,19 @@ html {
 
 .chat-sep {
   /* Courtesy of https://uigradients.com/#Atlas */
-  background: #FEAC5E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #4BC0C8, #C779D0, #9c3734);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #4BC0C8, #C779D0, #9c3734); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #feac5e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4bc0c8,
+    #c779d0,
+    #9c3734
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #4bc0c8,
+    #c779d0,
+    #9c3734
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-radius: 10px;
   z-index: 1;
   width: 100%;
@@ -63,15 +73,13 @@ html {
   border-radius: 10px;
   padding: 5px;
   width: 100%;
-
 }
 
 .chat-title {
   color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: large;
 }
-
 
 .editorArea {
   width: 80%;
@@ -112,9 +120,13 @@ html {
 }
 
 .Home {
-  background: #403A3E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #BE5869, #403A3E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #403a3e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #be5869, #403a3e); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #be5869,
+    #403a3e
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   position: relative;
   /* padding-bottom: 4.3%; */
 }
@@ -123,7 +135,7 @@ html {
   margin-right: 3%;
 }
 
-.NaviBar:nth-of-type(1){
+.NaviBar:nth-of-type(1) {
   border-radius: 15px 15px 0px 0px;
 }
 
@@ -136,7 +148,6 @@ html {
   position: absolute;
   right: 2%;
 }
-
 
 .account {
   height: 100vh;
@@ -155,7 +166,7 @@ html {
   margin: auto;
   padding: 0;
   background-color: #343a4005;
-} 
+}
 
 .account__card {
   background-color: rgba(255, 255, 255, 0.116);
