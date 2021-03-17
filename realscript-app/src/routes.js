@@ -1,11 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import Home from "./pages/home.js";
 import Editor from "./pages/editor.js";
 import Profile from "./pages/profile.js";
 import Settings from "./pages/settings.js";
-import Login from "./pages/login.js";
 
 class Routes extends React.Component {
   render() {

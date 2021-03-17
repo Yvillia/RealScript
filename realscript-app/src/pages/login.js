@@ -3,7 +3,9 @@ import "../assets/main.css";
 import Identicon from "react-identicons";
 import { Redirect } from "react-router-dom";
 import { client } from "../modules/socketClient";
-export default class Login extends Component {
+// import { PrivateRoute } from "../modules/privateRoute";
+
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +14,7 @@ export default class Login extends Component {
       username: null,
       text: ""
     };
+    this.authenticated = false;
   }
 
   logInUser = () => {
@@ -65,6 +68,7 @@ export default class Login extends Component {
       </div>
     </div>
   );
+
   render() {
     const { username } = this.state;
     global.name = username;
@@ -77,3 +81,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default Login;
