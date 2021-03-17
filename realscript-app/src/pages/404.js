@@ -6,10 +6,8 @@ class NotFoundPage extends React.Component {
     return (
       <div>
         <img className="pageNotFound" src={PageNotFound} />
-        <p className="goToHome" style={{ textAlign: "right" }}>
-          <Link to="/" className="btn btn-primary">
-            Wanna rejoin?
-          </Link>
+        <p className="goToHome" style={{ textAlign: "right", fontSize: 80 }}>
+          <Link to="/"> Wanna rejoin? </Link>
         </p>
       </div>
     );
