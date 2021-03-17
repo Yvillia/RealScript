@@ -3,7 +3,7 @@ import "../assets/main.css";
 import Identicon from "react-identicons";
 import { Redirect } from "react-router-dom";
 import { client } from "../modules/socketClient";
-// import { PrivateRoute } from "../modules/privateRoute";
+import { Alert } from "@material-ui/lab";
 
 class Login extends Component {
   constructor(props) {
@@ -75,6 +75,11 @@ class Login extends Component {
     return (
       <React.Fragment>
         <div className="container-fluid">
+          {this.props.alert ? (
+            <Alert severity="error">This is an error alert — check it out!</Alert>
+          ) : (
+            console.log("works fine")
+          )}
           {username ? <Redirect to={"/Home"} /> : this.showLoginSection()}
         </div>
       </React.Fragment>
