@@ -3,6 +3,7 @@ import ButtonRow from "../modules/buttonRow";
 import "../assets/main.css";
 // import Footer from "../modules/footer"
 import "../pages/login.js";
+import SettingsBody from "../modules/settingsArea";
 
 export default class Settings extends Component {
   render() {
@@ -13,6 +14,7 @@ export default class Settings extends Component {
             <ButtonRow user={global.name} />
           </div>
         </div>
+        <SettingsBody />
         {/* <Footer /> */}
       </html>
     );
