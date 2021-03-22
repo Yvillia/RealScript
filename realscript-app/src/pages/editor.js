@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import "../assets/main.css";
 import ButtonRow from "../modules/buttonRow";
 import TextEditor from "../modules/textEditor";
-// import Footer from "../modules/footer";
 import "../pages/login.js";
 import { SocialBar } from "../modules/socialBar";
+import { Redirect } from "react-router-dom";
+import Login from "../pages/login.js";
 
 export default class Editor extends Component {
   render() {
@@ -12,6 +13,14 @@ export default class Editor extends Component {
       <html>
         <body>
           <div className="Home">
+            {global.name === "null" ? (
+              <div>
+                <Redirect to={"/"}></Redirect>
+                <Login alert="alert"></Login>
+              </div>
+            ) : (
+              console.log("user logged in sucessfully")
+            )}
             <div className="navbar">
               <ButtonRow user={global.name} />
             </div>

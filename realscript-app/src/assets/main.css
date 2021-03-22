@@ -226,3 +226,21 @@ html {
   margin-right: auto;
   text-align: left;
 }
+
+.pageNotFound {
+  height: 100vh;
+  width: 50%;
+  min-height: 100vh;
+  display: flex;
+  overflow-y: auto;
+}
+
+.goToHome {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 18%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 200px;
+}
