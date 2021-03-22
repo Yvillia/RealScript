@@ -3,7 +3,9 @@ import "../assets/main.css";
 import Identicon from "react-identicons";
 import { Redirect } from "react-router-dom";
 import { client } from "../modules/socketClient";
-export default class Login extends Component {
+import { Alert } from "@material-ui/lab";
+
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +14,7 @@ export default class Login extends Component {
       username: null,
       text: ""
     };
+    this.authenticated = false;
   }
 
   logInUser = () => {
@@ -65,15 +68,23 @@ export default class Login extends Component {
       </div>
     </div>
   );
+
   render() {
     const { username } = this.state;
     global.name = username;
     return (
       <React.Fragment>
         <div className="container-fluid">
+          {this.props.alert ? (
+            <Alert severity="error">This is an error alert — check it out!</Alert>
+          ) : (
+            console.log("works fine")
+          )}
           {username ? <Redirect to={"/Home"} /> : this.showLoginSection()}
         </div>
       </React.Fragment>
     );
   }
 }
+
+export default Login;
