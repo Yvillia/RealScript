@@ -43,18 +43,6 @@ const clients = {};
 //     });
 // });
 
-const typesDef = {
-  USER_EVENT: "userevent",
-  CONTENT_CHANGE: "contentchange"
-}
-
-// sending the current data to all connected clients
-const sendMessage = (json) => {
-  Object.keys(clients).map((client) => {
-    clients[client].sendUTF(json);
-  });
-}
-
 wsServer.on("request", function (request) {
   if (!originIsAllowed(request.origin)) {
     request.reject();
@@ -80,14 +68,5 @@ wsServer.on("request", function (request) {
         // console.log('sent Message to: ', clients[key]);
       }
     }
-  });
-  connection.on('close', function(connection) {
-    console.log((new Date()) + " Peer " + userID + " disconnected.");
-    const json = { type: typesDef.USER_EVENT };
-    userActivity.push(`${users[userID].username} left the document`);
-    json.data = { users, userActivity };
-    delete clients[userID];
-    delete users[userID];
-    sendMessage(JSON.stringify(json));
   });
 });

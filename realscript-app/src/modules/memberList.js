@@ -37,10 +37,19 @@ export default class MemberList extends React.Component {
       this.setState((state) => ({ user_list: [...state.user_list, usr] }));
   };
 
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
   buildUsers() {
     let responseCollection = "";
     for (const usr of this.state.user_list) {
-      responseCollection += usr + "\n";
+      const randomGenerator = [
+        "Welcome " + usr + ". Say hi!\n",
+        usr + "has joined the server!\n",
+        usr + "just showed up!\n"
+      ];
+      responseCollection += randomGenerator[this.getRandomInt(3)];
     }
     return responseCollection;
   }
