@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ButtonRow from "../modules/buttonRow";
 import "../assets/main.css";
 import "../pages/login.js";
+import SettingsBody from "../modules/settingsArea";
 import { Redirect } from "react-router-dom";
 
 export default class Settings extends Component {
@@ -18,6 +19,7 @@ export default class Settings extends Component {
             <ButtonRow user={global.name} />
           </div>
         </div>
+        <SettingsBody />
         {/* <Footer /> */}
       </html>
     );
