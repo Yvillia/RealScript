@@ -6,21 +6,18 @@ const URL = "ws://127.0.0.1:8080";
 class TextEditor extends React.Component {
   state = {
     sender: this.props.user,
-    messageContent: "",
-    receivedContent: ""
+    messageContent: ""
   };
 
   ws = new w3cwebsocket(URL, "chatting");
-
   componentDidMount() {
     this.ws.onopen = () => {
       console.log("Connected to WebSocket");
     };
 
     this.ws.onmessage = (res) => {
-      const txt = JSON.parse(res.data).update;
-      if (txt) {
-        this.setState({ receivedContent: txt });
+      if (JSON.parse(res.data).name !== this.state.sender) {
+        const txt = JSON.parse(res.data).update;
         this.setState({ messageContent: txt });
       }
     };
@@ -31,9 +28,13 @@ class TextEditor extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   updateText = (txt) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const serverTxt = { name: this.state.name, update: txt };
+    const serverTxt = { name: this.state.sender, update: txt };
     if (this.ws.readyState === this.ws.OPEN) {
       this.ws.send(JSON.stringify(serverTxt));
     } else {
@@ -52,10 +53,10 @@ class TextEditor extends React.Component {
             className="chatStyle"
             type="text"
             placeholder="Start Typing Here..."
-            defaultValue={this.state.receivedContent}
+            value={this.state.messageContent}
             onChange={(event) => {
               this.setState({ messageContent: event.target.value });
-              this.updateText(this.state.messageContent);
+              this.updateText(event.target.value);
               // console.log(`RC: ${this.state.receivedContent}`);
               // console.log(`MC: ${this.state.messageContent}`);
             }}

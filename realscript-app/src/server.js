@@ -3,7 +3,7 @@ const webSocketServer = require("websocket").server;
 const http = require("http");
 const uuid = require("uuid");
 const webSocketServerPort = 8080;
-var text = "";
+var currentText = '';
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -59,32 +59,38 @@ wsServer.on("request", function (request) {
   connection.on("message", function (message) {
     if (message.type === "utf8") {
       console.log("Received Message: " + message.utf8Data);
-
-      // broadcasting message to all connected clients
-      for (var key in clients) {
-        clients[key].sendUTF(message.utf8Data);
-        // clients[key].sendUTF(
-        //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
-        // );
-        // console.log('sent Message to: ', clients[key]);
+      var newMessage = message.utf8Data;
+      if (newMessage !== currentText) {
+        currentText = newMessage;
+        // broadcasting message to all connected clients
+        for (var key in clients) {
+          clients[key].sendUTF(message.utf8Data);
+          // clients[key].sendUTF(
+          //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
+          // );
+          // console.log('sent Message to: ', clients[key]);
+        }
       }
     }
   });
 
   connection.on("update", function (update) {
     if (update.type === "utf8") {
-      console.log("Received Message: " + update.utf8Data);
+      messageQueue.push(update.utf8Data);
+      console.log("Received TextUpdate: " + update.utf8Data);
       // if (txt !== update) {
-      txt = update;
+      var newMessage = messageQueue.pull();
+      if (newMessage !== currentText) {
       // broadcasting message to all connected clients
-      for (var key in clients) {
-        clients[key].sendUTF(update.utf8Data);
-        // clients[key].sendUTF(
-        //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
-        // );
-        // console.log('sent Message to: ', clients[key]);
+        for (var key in clients) {
+          clients[key].sendUTF(newMessage);
+          // clients[key].sendUTF(
+          //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
+          // );
+          // console.log('sent Message to: ', clients[key]);
+        }
+        // }
       }
-      // }
     }
   });
 });

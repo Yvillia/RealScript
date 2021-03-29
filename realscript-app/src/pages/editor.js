@@ -16,7 +16,7 @@ export default class Editor extends Component {
               <ButtonRow user={global.name} />
             </div>
             <span className="editorSplit">
-              <TextEditor />
+              <TextEditor user={global.name} />
               <div className="chatSplit">
                 <SocialBar user={global.name} input_width="325" />
               </div>
