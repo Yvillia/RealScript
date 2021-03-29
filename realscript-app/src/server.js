@@ -3,7 +3,7 @@ const webSocketServer = require("websocket").server;
 const http = require("http");
 const uuid = require("uuid");
 const webSocketServerPort = 8080;
-var currentText = '';
+var currentText = "";
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -81,7 +81,7 @@ wsServer.on("request", function (request) {
       // if (txt !== update) {
       var newMessage = messageQueue.pull();
       if (newMessage !== currentText) {
-      // broadcasting message to all connected clients
+        // broadcasting message to all connected clients
         for (var key in clients) {
           clients[key].sendUTF(newMessage);
           // clients[key].sendUTF(
