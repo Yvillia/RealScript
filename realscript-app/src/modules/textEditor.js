@@ -6,19 +6,35 @@ const URL = "ws://127.0.0.1:8080";
 class TextEditor extends React.Component {
   state = {
     sender: this.props.user,
-    messageContent: ""
+    messageContent: "",
+    msgState: 0
   };
 
   ws = new w3cwebsocket(URL, "chatting");
   componentDidMount() {
-    this.ws.onopen = () => {
-      console.log("Connected to WebSocket");
+    this.ws.onopen = (res) => {
+      console.log(`Connected to WebSocket: ${res.data}`);
     };
 
     this.ws.onmessage = (res) => {
-      if (JSON.parse(res.data).name !== this.state.sender) {
-        const txt = JSON.parse(res.data).update;
-        this.setState({ messageContent: txt });
+      try {
+        const JSONmsg = JSON.parse(res.data);
+        console.log(JSONmsg);
+        const responseMsg = JSON.parse(JSONmsg.utf8Data);
+        console.log(responseMsg);
+
+        if (responseMsg.messageState == -1) {
+          this.setState({ messageContent: responseMsg.update });
+          this.setState({ msgState: responseMsg.currMessageState });
+        } else {
+          if (responseMsg.name !== this.state.sender) {
+            this.setState({ messageContent: responseMsg.update });
+            console.log(responseMsg.messageState);
+          }
+          this.setState({ msgState: responseMsg.messageState });
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
@@ -34,7 +50,7 @@ class TextEditor extends React.Component {
 
   updateText = (txt) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const serverTxt = { name: this.state.sender, update: txt };
+    const serverTxt = { name: this.state.sender, update: txt, messageState: this.state.msgState };
     if (this.ws.readyState === this.ws.OPEN) {
       this.ws.send(JSON.stringify(serverTxt));
     } else {
@@ -57,8 +73,6 @@ class TextEditor extends React.Component {
             onChange={(event) => {
               this.setState({ messageContent: event.target.value });
               this.updateText(event.target.value);
-              // console.log(`RC: ${this.state.receivedContent}`);
-              // console.log(`MC: ${this.state.messageContent}`);
             }}
           />
         </Form.Group>

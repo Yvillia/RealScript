@@ -18,9 +18,19 @@ export default class ResponseArea extends React.Component {
     };
 
     this.ws.onmessage = (event) => {
-      // on receiving a message, add it to the list of messages
-      const msg = JSON.parse(event.data).message;
-      if (msg && msg.trim()) this.addHistory(msg);
+      let responseInfo, JSONmsg;
+      try {
+        // on receiving a message, add it to the list of messages
+        console.log(event.data);
+        JSONmsg = JSON.parse(event.data);
+        console.log(JSONmsg.utf8Data.name);
+        responseInfo = JSON.parse(JSONmsg.utf8Data);
+        if (responseInfo.message != undefined && responseInfo.message.trim()) {
+          this.addHistory(responseInfo.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     this.ws.onclose = () => {
