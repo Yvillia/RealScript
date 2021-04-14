@@ -12,26 +12,22 @@ class TextEditor extends React.Component {
 
   ws = new w3cwebsocket(URL, "chatting");
   componentDidMount() {
-    this.ws.onopen = (res) => {
-      console.log(`Connected to WebSocket: ${res.data}`);
-    };
-
+    this._isMounted = true;
     this.ws.onmessage = (res) => {
       try {
         const JSONmsg = JSON.parse(res.data);
-        console.log(JSONmsg);
         const responseMsg = JSON.parse(JSONmsg.utf8Data);
-        console.log(responseMsg);
 
-        if (responseMsg.messageState == -1) {
-          this.setState({ messageContent: responseMsg.update });
-          this.setState({ msgState: responseMsg.currMessageState });
-        } else {
-          if (responseMsg.name !== this.state.sender) {
+        if (responseMsg.update != undefined) {
+          if (responseMsg.messageState == -1) {
             this.setState({ messageContent: responseMsg.update });
-            console.log(responseMsg.messageState);
+            this.setState({ msgState: responseMsg.currMessageState });
+          } else {
+            if (responseMsg.name !== this.state.sender) {
+              this.setState({ messageContent: responseMsg.update });
+            }
+            this.setState({ msgState: responseMsg.messageState });
           }
-          this.setState({ msgState: responseMsg.messageState });
         }
       } catch (error) {
         console.log(error);

@@ -51,9 +51,6 @@ wsServer.on("request", function (request) {
       const newMessage = JSON.parse(message.utf8Data);
 
       if (newMessage.update != undefined) {
-        console.log("My Message Update: " + newMessage.update);
-        console.log("Current Iter: " + currentMessageIter);
-        console.log("Incoming Iter: " + newMessage.messageState);
         if (currentMessageIter <= newMessage.messageState) {
           while (currentMessageIter < message.messageState) setTimeout(10);
           if (newMessage.update !== currentText) {
@@ -61,7 +58,6 @@ wsServer.on("request", function (request) {
             // broadcasting message to all connected clients
             newMessage.messageState = ++currentMessageIter;
             message.utf8Data = JSON.stringify(newMessage);
-            console.log("My Message is: " + JSON.stringify(message));
             for (var key in clients) {
               clients[key].sendUTF(JSON.stringify(message));
             }
