@@ -43,7 +43,10 @@ wsServer.on("request", function (request) {
   clients[userID] = connection;
   console.log("connected: " + userID + " in " + Object.getOwnPropertyNames(clients));
 
-  if (currentText !== "") clients[userID].sendUTF(`{ "type":"utf8", "utf8Data": "{ \\\"name\\\": \\\"server\\\", \\\"messageState\\\" : -1, \\\"update\\\": \\\"${currentText}\\\", \\\"currMessageState\\\": ${currentMessageIter} }" }`);
+  if (currentText !== "")
+    clients[userID].sendUTF(
+      `{ "type":"utf8", "utf8Data": "{ \\\"name\\\": \\\"server\\\", \\\"messageState\\\" : -1, \\\"update\\\": \\\"${currentText}\\\", \\\"currMessageState\\\": ${currentMessageIter} }" }`
+    );
 
   connection.on("message", function (message) {
     if (message.type === "utf8") {
