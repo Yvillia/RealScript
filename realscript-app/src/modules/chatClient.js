@@ -13,14 +13,15 @@ export default class ChatClient extends React.Component {
   ws = client;
 
   componentDidMount() {
-    this.ws.onopen = () => {
-      console.log("Connected to WebSocket");
-    };
-
+    this._isMounted = true;
     this.ws.onclose = () => {
       console.log("Disconnected From WebSocket");
       this.ws = new w3cwebsocket(URL, "chatting");
     };
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   sendMessage = (msg) => {

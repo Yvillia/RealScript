@@ -3,6 +3,8 @@ const webSocketServer = require("websocket").server;
 const http = require("http");
 const uuid = require("uuid");
 const webSocketServerPort = 8080;
+var currentMessageIter = 0;
+var currentText = "";
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -28,21 +30,6 @@ function originIsAllowed(origin) {
 
 const clients = {};
 
-// Commented out part is for testing
-// wsServer.on('connection', function connection(ws) {
-//     console.log("Here1");
-//     ws.on('message', function incoming(data) {
-//         console.log(data);
-//         wsServer.clients.forEach(function each(client) {
-//             console.log("Here3");
-//             if (client !== ws && client.readyState === WebSocket.OPEN) {
-//                 client.send(data);
-//                 console.log(data);
-//             }
-//         });
-//     });
-// });
-
 wsServer.on("request", function (request) {
   if (!originIsAllowed(request.origin)) {
     request.reject();
@@ -55,17 +42,34 @@ wsServer.on("request", function (request) {
   const connection = request.accept("chatting", request.origin);
   clients[userID] = connection;
   console.log("connected: " + userID + " in " + Object.getOwnPropertyNames(clients));
+
+  if (currentText !== "")
+    clients[userID].sendUTF(
+      `{ "type":"utf8", "utf8Data": "{ \\\"name\\\": \\\"server\\\", \\\"messageState\\\" : -1, \\\"update\\\": \\\"${currentText}\\\", \\\"currMessageState\\\": ${currentMessageIter} }" }`
+    );
+
   connection.on("message", function (message) {
     if (message.type === "utf8") {
       console.log("Received Message: " + message.utf8Data);
+      const newMessage = JSON.parse(message.utf8Data);
 
-      // broadcasting message to all connected clients
-      for (var key in clients) {
-        clients[key].sendUTF(message.utf8Data);
-        // clients[key].sendUTF(
-        //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
-        // );
-        // console.log('sent Message to: ', clients[key]);
+      if (newMessage.update != undefined) {
+        if (currentMessageIter <= newMessage.messageState) {
+          while (currentMessageIter < message.messageState) setTimeout(10);
+          if (newMessage.update !== currentText) {
+            currentText = newMessage.update;
+            // broadcasting message to all connected clients
+            newMessage.messageState = ++currentMessageIter;
+            message.utf8Data = JSON.stringify(newMessage);
+            for (var key in clients) {
+              clients[key].sendUTF(JSON.stringify(message));
+            }
+          }
+        }
+      } else {
+        for (var key in clients) {
+          clients[key].sendUTF(JSON.stringify(message));
+        }
       }
     }
   });

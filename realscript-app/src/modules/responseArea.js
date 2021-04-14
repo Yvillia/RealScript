@@ -1,7 +1,6 @@
 import React from "react";
 import "../assets/main.css";
 import { w3cwebsocket } from "websocket";
-// import { client } from "./socketClient";
 const URL = "ws://127.0.0.1:8080";
 
 export default class ResponseArea extends React.Component {
@@ -13,14 +12,18 @@ export default class ResponseArea extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.ws.onopen = () => {
-      console.log("Connected to WebSocket");
-    };
-
     this.ws.onmessage = (event) => {
-      // on receiving a message, add it to the list of messages
-      const msg = JSON.parse(event.data).message;
-      this.addHistory(msg);
+      let responseInfo, JSONmsg;
+      try {
+        // on receiving a message, add it to the list of messages
+        JSONmsg = JSON.parse(event.data);
+        responseInfo = JSON.parse(JSONmsg.utf8Data);
+        if (responseInfo.message != undefined && responseInfo.message.trim()) {
+          this.addHistory(responseInfo.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     this.ws.onclose = () => {
