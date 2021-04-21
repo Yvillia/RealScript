@@ -6,7 +6,8 @@ const URL = "ws://127.0.0.1:8080";
 
 export default class ResponseArea extends React.Component {
   state = {
-    msgs: []
+    msgs: [],
+    userActivity: []
   };
 
   ws = new w3cwebsocket(URL, "chatting");
@@ -19,8 +20,20 @@ export default class ResponseArea extends React.Component {
 
     this.ws.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
-      const msg = JSON.parse(event.data).message;
-      this.addHistory(msg);
+      // console.log("this is the message received!!!!!!");
+      // console.log(event);
+      const data = JSON.parse(event.data).data;
+      const type = JSON.parse(event.data).type;
+      if (type === "contentchange") {
+        const msg = JSON.parse(data).message;
+        // console.log("content change!!!");
+        // console.log(msg);
+        this.addHistory(msg);
+      } else if (type === "userevent") {
+        this.setState({ userActivity: data.userActivity });
+        // console.log("user activity change!!");
+        // console.log(this.state.userActivity);
+      }
     };
 
     this.ws.onclose = () => {
@@ -41,6 +54,15 @@ export default class ResponseArea extends React.Component {
     return responseCollection;
   }
 
+  buildUsersStatus() {
+    let responseCollection = "";
+    for (const usr_act of this.state.userActivity) {
+      responseCollection += usr_act + "\n";
+    }
+    console.log("this is responseCollection");
+    return responseCollection;
+  }
+
   // Records History
   addHistory = (msg) => this.setState((state) => ({ msgs: [...state.msgs, msg] }));
 
@@ -53,7 +75,7 @@ export default class ResponseArea extends React.Component {
           rows="10"
           readOnly
           type="text"
-          value={this.buildMessage()}
+          value={this.buildUsersStatus()}
         ></textarea>
       </div>
     );

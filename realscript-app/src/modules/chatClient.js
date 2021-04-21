@@ -14,7 +14,7 @@ export default class ChatClient extends React.Component {
 
   componentDidMount() {
     this.ws.onopen = () => {
-      console.log("Connected to WebSocket");
+      console.log("Chat client connected to WebSocket");
     };
 
     this.ws.onclose = () => {
@@ -25,7 +25,7 @@ export default class ChatClient extends React.Component {
 
   sendMessage = (msg) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const messg = { name: this.state.name, message: msg };
+    const messg = { name: this.state.name, message: msg, type: "contentchange" };
     if (this.ws.readyState === this.ws.OPEN) {
       this.ws.send(JSON.stringify(messg));
     } else {

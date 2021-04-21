@@ -5,7 +5,8 @@ const URL = "ws://127.0.0.1:8080";
 
 export default class MemberList extends React.Component {
   state = {
-    user_list: []
+    // user_list: [],
+    user_activity: []
   };
 
   ws = new w3cwebsocket(URL, "chatting");
@@ -18,8 +19,19 @@ export default class MemberList extends React.Component {
 
     this.ws.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
-      const usr = JSON.parse(event.data).name;
-      this.addUser(usr);
+      const data = JSON.parse(event.data).data;
+      const type = JSON.parse(event.data).type;
+      const usr = JSON.parse(data).name;
+      console.log("This is updating memberList!!!!");
+      console.log(type);
+      console.log(usr);
+      // this.addUser(usr);
+      if (type === "userevent") {
+        console.log("reach the user activtiy???");
+        const user_act = JSON.parse(data).userActivity;
+        this.setState({ user_activity: user_act });
+      }
+      console.log(this.state.user_activity);
     };
 
     this.ws.onclose = () => {
@@ -32,25 +44,18 @@ export default class MemberList extends React.Component {
     this._isMounted = false;
   }
 
-  addUser = (usr) => {
-    if (!this.state.user_list.includes(usr))
-      this.setState((state) => ({ user_list: [...state.user_list, usr] }));
-  };
+  // addUser = (usr) => {
+  //   if (!this.state.user_list.includes(usr)) {
+  //     this.setState((state) => ({ user_list: [...state.user_list, usr] }));
+  //   }
+  // };
 
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
-  buildUsers() {
+  buildUsersStatus() {
     let responseCollection = "";
-    for (const usr of this.state.user_list) {
-      const randomGenerator = [
-        "Welcome " + usr + ". Say hi!\n",
-        usr + "has joined the server!\n",
-        usr + "just showed up!\n"
-      ];
-      responseCollection += randomGenerator[this.getRandomInt(3)];
+    for (const usr_act of this.state.user_activity) {
+      responseCollection += usr_act + "\n";
     }
+    console.log("this is responseCollection");
     return responseCollection;
   }
 
@@ -73,7 +78,7 @@ export default class MemberList extends React.Component {
             rows="8"
             readOnly
             type="text"
-            value={this.buildUsers()}
+            value={this.buildUsersStatus()}
           ></textarea>
         </form>
       </div>

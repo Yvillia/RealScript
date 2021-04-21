@@ -25,23 +25,33 @@ function originIsAllowed(origin) {
   // TODO: put logic here to detect whether the specified origin is allowed.
   return true;
 }
-
+// All active connections
 const clients = {};
+// All active users
+const users = {};
+// User activity history.
+let userActivity = [];
 
-// Commented out part is for testing
-// wsServer.on('connection', function connection(ws) {
-//     console.log("Here1");
-//     ws.on('message', function incoming(data) {
-//         console.log(data);
-//         wsServer.clients.forEach(function each(client) {
-//             console.log("Here3");
-//             if (client !== ws && client.readyState === WebSocket.OPEN) {
-//                 client.send(data);
-//                 console.log(data);
-//             }
-//         });
-//     });
-// });
+const typesDef = {
+  USER_EVENT: "userevent",
+  CONTENT_CHANGE: "contentchange"
+}
+
+const sendMessage = (json) => {
+  // We are sending the current data to all connected clients
+  Object.keys(clients).map((client) => {
+    clients[client].sendUTF(json);
+  });
+}
+
+getRandomWelcome = (usr) => {
+  const randomGenerator = [
+    "Welcome " + usr + ". Say hi!\n",
+    usr + " has joined the server!\n",
+    usr + " just showed up!\n"
+  ];
+  return randomGenerator[Math.floor(Math.random() * Math.floor(3))];
+}
 
 wsServer.on("request", function (request) {
   if (!originIsAllowed(request.origin)) {
@@ -50,23 +60,50 @@ wsServer.on("request", function (request) {
   }
   var userID = uuid.v4();
   console.log(new Date() + " Recieved a new connection from origin " + request.origin + ".");
-
   // use 'echo-protocol' for testing
   const connection = request.accept("chatting", request.origin);
   clients[userID] = connection;
   console.log("connected: " + userID + " in " + Object.getOwnPropertyNames(clients));
   connection.on("message", function (message) {
+    console.log("this is message: ");
+    console.log(message);
     if (message.type === "utf8") {
       console.log("Received Message: " + message.utf8Data);
-
-      // broadcasting message to all connected clients
-      for (var key in clients) {
-        clients[key].sendUTF(message.utf8Data);
-        // clients[key].sendUTF(
-        //     JSON.stringify({type: 'ADD_MESSAGE', payload: key})
-        // );
-        // console.log('sent Message to: ', clients[key]);
+      const dataFromClient = JSON.parse(message.utf8Data);
+      console.log(dataFromClient.username);
+      const json = {"type": dataFromClient.type}
+      if (dataFromClient.type === typesDef.USER_EVENT) {
+        console.log("New user join the server: ");
+        console.log(dataFromClient);
+        users[userID] = dataFromClient;
+        console.log("try access user name: ")
+        console.log(users[userID].username);
+        console.log("these are the users: ")
+        console.log(users);
+        userActivity.push(getRandomWelcome(dataFromClient.username));
+        json.data = { users, userActivity };
+      } else if (dataFromClient.type === typesDef.CONTENT_CHANGE) {
+        json.data = message.utf8Data;
       }
+      // broadcasting message to all connected clients
+      console.log("check if json file format");
+      console.log(JSON.stringify(json));
+      sendMessage(JSON.stringify(json));
     }
+  });
+
+  // detect disconnection and remove user
+  connection.on('close', function(connection) {
+    console.log((new Date()) + " Peer " + userID + " disconnected.");
+    const json = { type: typesDef.USER_EVENT };
+    console.log("this is the user list:");
+    console.log(users);
+    console.log(users[userID]);
+    userActivity.push(`${users[userID].username} has left.`);
+    console.log(userActivity);
+    json.data = { users, userActivity };
+    delete clients[userID];
+    delete users[userID];
+    sendMessage(JSON.stringify(json));
   });
 });
