@@ -13,10 +13,6 @@ export default class MemberList extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.ws.onopen = () => {
-      console.log("Connected to WebSocket");
-    };
-
     this.ws.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
       const data = JSON.parse(event.data).data;

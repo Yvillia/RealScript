@@ -3,6 +3,8 @@ const webSocketServer = require("websocket").server;
 const http = require("http");
 const uuid = require("uuid");
 const webSocketServerPort = 8080;
+var currentMessageIter = 0;
+var currentText = "";
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -37,6 +39,7 @@ const typesDef = {
   CONTENT_CHANGE: "contentchange"
 }
 
+<<<<<<< HEAD
 const sendMessage = (json) => {
   // We are sending the current data to all connected clients
   Object.keys(clients).map((client) => {
@@ -53,6 +56,8 @@ getRandomWelcome = (usr) => {
   return randomGenerator[Math.floor(Math.random() * Math.floor(3))];
 }
 
+=======
+>>>>>>> f0cb1b0093027da2ee82665cbd4d4f70b32aabc4
 wsServer.on("request", function (request) {
   if (!originIsAllowed(request.origin)) {
     request.reject();
@@ -64,6 +69,12 @@ wsServer.on("request", function (request) {
   const connection = request.accept("chatting", request.origin);
   clients[userID] = connection;
   console.log("connected: " + userID + " in " + Object.getOwnPropertyNames(clients));
+
+  if (currentText !== "")
+    clients[userID].sendUTF(
+      `{ "type":"utf8", "utf8Data": "{ \\\"name\\\": \\\"server\\\", \\\"messageState\\\" : -1, \\\"update\\\": \\\"${currentText}\\\", \\\"currMessageState\\\": ${currentMessageIter} }" }`
+    );
+
   connection.on("message", function (message) {
     console.log("this is message: ");
     console.log(message);

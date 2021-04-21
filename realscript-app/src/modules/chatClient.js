@@ -23,6 +23,10 @@ export default class ChatClient extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   sendMessage = (msg) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
     const messg = { name: this.state.name, message: msg, type: "contentchange" };
