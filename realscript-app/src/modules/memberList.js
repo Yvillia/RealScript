@@ -1,7 +1,6 @@
 import React from "react";
 import "../assets/main.css";
-import { w3cwebsocket } from "websocket";
-const URL = "ws://127.0.0.1:8080";
+import { client } from "../modules/socketClient";
 
 export default class MemberList extends React.Component {
   state = {
@@ -9,30 +8,28 @@ export default class MemberList extends React.Component {
     user_activity: []
   };
 
-  ws = new w3cwebsocket(URL, "chatting");
-
   componentDidMount() {
     this._isMounted = true;
-    this.ws.onmessage = (event) => {
+    client.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
       const data = JSON.parse(event.data).data;
       const type = JSON.parse(event.data).type;
-      const usr = JSON.parse(data).name;
+      console.log(data.userActivity);
+      // const usr = JSON.parse(data).name;
       console.log("This is updating memberList!!!!");
       console.log(type);
-      console.log(usr);
+      // console.log(usr);
       // this.addUser(usr);
       if (type === "userevent") {
         console.log("reach the user activtiy???");
-        const user_act = JSON.parse(data).userActivity;
-        this.setState({ user_activity: user_act });
+        this.setState({ user_activity: data.userActivity });
       }
       console.log(this.state.user_activity);
     };
 
-    this.ws.onclose = () => {
+    client.onclose = () => {
       console.log("Disconnected From WebSocket");
-      this.setState({ ws: new w3cwebsocket(URL, "chatting") });
+      // this.setState({ ws: new w3cwebsocket(URL, "chatting") });
     };
   }
 

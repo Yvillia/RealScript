@@ -80,7 +80,7 @@ class Login extends Component {
           ) : (
             console.log("works fine")
           )}
-          {username ? <Redirect to={"/Home"} /> : this.showLoginSection()}
+          {username ? <Redirect to={"/Editor"} /> : this.showLoginSection()}
         </div>
       </React.Fragment>
     );

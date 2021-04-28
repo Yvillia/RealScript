@@ -39,7 +39,6 @@ const typesDef = {
   CONTENT_CHANGE: "contentchange"
 }
 
-<<<<<<< HEAD
 const sendMessage = (json) => {
   // We are sending the current data to all connected clients
   Object.keys(clients).map((client) => {
@@ -56,17 +55,15 @@ getRandomWelcome = (usr) => {
   return randomGenerator[Math.floor(Math.random() * Math.floor(3))];
 }
 
-=======
->>>>>>> f0cb1b0093027da2ee82665cbd4d4f70b32aabc4
 wsServer.on("request", function (request) {
   if (!originIsAllowed(request.origin)) {
     request.reject();
     console.log(new Date() + " Connection from origin " + request.origin + " rejected.");
   }
-  var userID = uuid.v4();
   console.log(new Date() + " Recieved a new connection from origin " + request.origin + ".");
   // use 'echo-protocol' for testing
   const connection = request.accept("chatting", request.origin);
+  var userID = uuid.v4();
   clients[userID] = connection;
   console.log("connected: " + userID + " in " + Object.getOwnPropertyNames(clients));
 

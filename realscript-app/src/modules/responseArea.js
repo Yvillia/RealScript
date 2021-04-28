@@ -1,7 +1,8 @@
 import React from "react";
 import "../assets/main.css";
-import { w3cwebsocket } from "websocket";
-const URL = "ws://127.0.0.1:8080";
+import { client } from "./socketClient";
+// import { w3cwebsocket } from "websocket";
+// const URL = "ws://127.0.0.1:8080";
 
 export default class ResponseArea extends React.Component {
   state = {
@@ -9,11 +10,11 @@ export default class ResponseArea extends React.Component {
     userActivity: []
   };
 
-  ws = new w3cwebsocket(URL, "chatting");
+  // ws = new w3cwebsocket(URL, "chatting");
 
   componentDidMount() {
     this._isMounted = true;
-    this.ws.onmessage = (event) => {
+    client.onmessage = (event) => {
       // on receiving a message, add it to the list of messages
       // console.log("this is the message received!!!!!!");
       // console.log(event);
@@ -21,19 +22,19 @@ export default class ResponseArea extends React.Component {
       const type = JSON.parse(event.data).type;
       if (type === "contentchange") {
         const msg = JSON.parse(data).message;
-        // console.log("content change!!!");
-        // console.log(msg);
+        console.log("content change!!!");
+        console.log(msg);
         this.addHistory(msg);
       } else if (type === "userevent") {
         this.setState({ userActivity: data.userActivity });
-        // console.log("user activity change!!");
-        // console.log(this.state.userActivity);
+        console.log("user activity change!!");
+        console.log(this.state.userActivity);
       }
     };
 
-    this.ws.onclose = () => {
+    client.onclose = () => {
       console.log("Disconnected From WebSocket");
-      this.setState({ ws: new w3cwebsocket(URL, "chatting") });
+      // this.setState({ ws: new w3cwebsocket(URL, "chatting") });
     };
   }
 
@@ -70,7 +71,7 @@ export default class ResponseArea extends React.Component {
           rows="10"
           readOnly
           type="text"
-          value={this.buildUsersStatus()}
+          value={this.buildMessage()}
         ></textarea>
       </div>
     );

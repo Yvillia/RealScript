@@ -1,8 +1,9 @@
 import "../assets/main.css";
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { w3cwebsocket } from "websocket";
-const URL = "ws://127.0.0.1:8080";
+import { client } from "../modules/socketClient";
+// import { w3cwebsocket } from "websocket";
+// const URL = "ws://127.0.0.1:8080";
 class TextEditor extends React.Component {
   state = {
     sender: this.props.user,
@@ -10,10 +11,10 @@ class TextEditor extends React.Component {
     msgState: 0
   };
 
-  ws = new w3cwebsocket(URL, "chatting");
+  // ws = new w3cwebsocket(URL, "chatting");
   componentDidMount() {
     this._isMounted = true;
-    this.ws.onmessage = (res) => {
+    client.onmessage = (res) => {
       try {
         const JSONmsg = JSON.parse(res.data);
         const responseMsg = JSON.parse(JSONmsg.utf8Data);
@@ -34,9 +35,9 @@ class TextEditor extends React.Component {
       }
     };
 
-    this.ws.onclose = () => {
+    client.onclose = () => {
       console.log("Disconnected From WebSocket");
-      this.setState({ ws: new w3cwebsocket(URL, "chatting") });
+      // this.setState({ ws: new w3cwebsocket(URL, "chatting") });
     };
   }
 
@@ -47,8 +48,8 @@ class TextEditor extends React.Component {
   updateText = (txt) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
     const serverTxt = { name: this.state.sender, update: txt, messageState: this.state.msgState };
-    if (this.ws.readyState === this.ws.OPEN) {
-      this.ws.send(JSON.stringify(serverTxt));
+    if (client.readyState === client.OPEN) {
+      client.send(JSON.stringify(serverTxt));
     } else {
       console.log("Still Connecting");
     }
