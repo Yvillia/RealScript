@@ -48,10 +48,13 @@ export default class ResponseArea extends React.Component {
   addHistory = (msg) => this.setState((state) => ({ msgs: [...state.msgs, msg] }));
 
   render() {
+    const darkMode = localStorage.getItem("darkMode");
+    const darkMode_text = localStorage.getItem("darkMode_text");
     return (
       <div className="chat-block">
         <p className="chat-title">Responses:</p>
         <textarea
+          style={{ backgroundColor: darkMode, color: darkMode_text }}
           className="chatStyle"
           rows="10"
           readOnly
