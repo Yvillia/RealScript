@@ -5,6 +5,8 @@ const uuid = require("uuid");
 const webSocketServerPort = 8080;
 var currentMessageIter = 0;
 var currentText = "";
+var persistentChat = [];
+var persistentUser = [];
 
 const server = new http.createServer((req, res) => {
   console.log(new Date() + " Received request for " + req.url);
@@ -48,6 +50,17 @@ wsServer.on("request", function (request) {
       `{ "type":"utf8", "utf8Data": "{ \\\"name\\\": \\\"server\\\", \\\"messageState\\\" : -1, \\\"update\\\": \\\"${currentText}\\\", \\\"currMessageState\\\": ${currentMessageIter} }" }`
     );
 
+  if (persistentChat.length !== 0) {
+    let updatePersistence = {};
+    updatePersistence.type = "persist";
+    updatePersistence.persistentChat = persistentChat;
+    updatePersistence.persistentUser = persistentUser;
+    clients[userID].sendUTF(
+      JSON.stringify(updatePersistence)
+      // `{ "type":"utf8", "utf8Data": "{ \\\"persistentChat\\\": ${persistentChat}, \\\"persistentUser\\\": ${persistentUser} }" }`
+    );
+  }
+
   connection.on("message", function (message) {
     if (message.type === "utf8") {
       console.log("Received Message: " + message.utf8Data);
@@ -67,6 +80,17 @@ wsServer.on("request", function (request) {
           }
         }
       } else {
+        if (newMessage.message != null && newMessage.message != undefined)
+          persistentChat.push(newMessage.message);
+        if (
+          newMessage.name != null &&
+          newMessage.name != undefined &&
+          !persistentUser.includes(newMessage.name)
+        )
+          persistentUser.push(newMessage.name);
+        newMessage.persistentChat = persistentChat;
+        newMessage.persistentUser = persistentUser;
+        message.utf8Data = JSON.stringify(newMessage);
         for (var key in clients) {
           clients[key].sendUTF(JSON.stringify(message));
         }
