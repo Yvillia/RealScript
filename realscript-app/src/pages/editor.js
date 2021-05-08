@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "../assets/main.css";
 import ButtonRow from "../modules/buttonRow";
-import TextEditor from "../modules/textEditor";
 import "../pages/login.js";
-import { SocialBar } from "../modules/socialBar";
+import SocialBar from "../modules/socialBar";
 import { Redirect } from "react-router-dom";
 import Login from "../pages/login.js";
 
@@ -24,12 +23,7 @@ export default class Editor extends Component {
             <div className="navbar">
               <ButtonRow user={global.name} />
             </div>
-            <span className="editorSplit">
-              <TextEditor user={global.name} />
-              <div className="chatSplit">
-                <SocialBar user={global.name} input_width="325" />
-              </div>
-            </span>
+            <SocialBar user={global.name} input_width="325" />
             {/* <Footer /> */}
           </div>
         </body>

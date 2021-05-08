@@ -79,6 +79,7 @@ wsServer.on("request", function (request) {
       console.log("Received Message: " + message.utf8Data);
       const dataFromClient = JSON.parse(message.utf8Data);
       console.log(dataFromClient.username);
+      console.log(dataFromClient.type);
       const json = {"type": dataFromClient.type}
       if (dataFromClient.type === typesDef.USER_EVENT) {
         console.log("New user join the server: ");
@@ -92,6 +93,20 @@ wsServer.on("request", function (request) {
         json.data = { users, userActivity };
       } else if (dataFromClient.type === typesDef.CONTENT_CHANGE) {
         json.data = message.utf8Data;
+      } else {
+        const newMessage = JSON.parse(message.utf8Data);
+        if (newMessage.update != undefined) {
+          if (currentMessageIter <= newMessage.messageState) {
+            while (currentMessageIter < message.messageState) setTimeout(10);
+            if (newMessage.update !== currentText) {
+              currentText = newMessage.update;
+              // broadcasting message to all connected clients
+              newMessage.messageState = ++currentMessageIter;
+              message.utf8Data = JSON.stringify(newMessage);
+            }
+          }
+          json.data = message.utf8Data;
+        }
       }
       // broadcasting message to all connected clients
       console.log("check if json file format");
