@@ -4,13 +4,15 @@ import Card from "react-bootstrap/Card";
 
 class InformationBody extends React.Component {
   render() {
+    const darkMode = localStorage.getItem("darkMode");
+    const darkMode_text = localStorage.getItem("darkMode_text");
     return (
       <div className="InformationBody">
         {/* <body className="head"> */}
-        <Card>
+        <Card style={{ backgroundColor: darkMode }}>
           <Card.Body>
-            <Card.Title>Implemented Features</Card.Title>
-            <Card.Text>
+            <Card.Title style={{ color: darkMode_text }}>Implemented Features</Card.Title>
+            <Card.Text style={{ color: darkMode_text }}>
               <ul>
                 <li>Multi-Client Server Connection</li>
                 <li>Live Chat Between Connected Clients</li>
@@ -26,10 +28,10 @@ class InformationBody extends React.Component {
           </Card.Body>
         </Card>
         <br />
-        <Card>
+        <Card style={{ backgroundColor: darkMode }}>
           <Card.Body>
-            <Card.Title>About</Card.Title>
-            <Card.Text>
+            <Card.Title style={{ color: darkMode_text }>About</Card.Title>
+            <Card.Text style={{ color: darkMode_text }>
               This is the final project for the University of Illinois at Urbana-Champaign's
               CS296-41 course. The overall goal for the project was to focus on topics that were
               gone over in CS241, the class that CS296-41 is an honors course for.

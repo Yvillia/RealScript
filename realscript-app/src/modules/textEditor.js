@@ -57,11 +57,14 @@ class TextEditor extends React.Component {
   };
 
   render() {
+    const darkMode = localStorage.getItem("darkMode");
+    const darkMode_text = localStorage.getItem("darkMode_text");
     return (
       <div className="editorArea">
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Live Collaborative Text Editor</Form.Label>
           <Form.Control
+            style={{ backgroundColor: darkMode, color: darkMode_text }}
             as="textarea"
             rows={30}
             className="chatStyle"
