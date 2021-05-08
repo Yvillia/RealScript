@@ -13,6 +13,8 @@ export default class ChatArea extends React.Component {
   };
 
   render() {
+    const darkMode = localStorage.getItem("darkMode");
+    const darkMode_text = localStorage.getItem("darkMode_text");
     return (
       <div className="chat-block">
         <p className="chat-title">Chat Below:</p>
@@ -27,6 +29,7 @@ export default class ChatArea extends React.Component {
           }}
         >
           <textarea
+            style={{ backgroundColor: darkMode, color: darkMode_text }}
             className="chatStyle"
             type="text"
             rows="7"
