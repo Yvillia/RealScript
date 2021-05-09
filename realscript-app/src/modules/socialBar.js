@@ -13,7 +13,6 @@ export default class SocialBar extends React.Component {
     userActivity: [],
     pos: 0,
     name: global.name,
-    sender: this.props.user,
     messageContent: "",
     msgState: 0
   };
@@ -30,14 +29,13 @@ export default class SocialBar extends React.Component {
         this.setState({ userActivity: data.userActivity });
       } else {
         try {
-          const JSONmsg = JSON.parse(event.data);
-          const responseMsg = JSON.parse(JSONmsg.utf8Data);
+          const responseMsg = JSON.parse(data);
           if (responseMsg.update != undefined) {
             if (responseMsg.messageState == -1) {
               this.setState({ messageContent: responseMsg.update });
               this.setState({ msgState: responseMsg.currMessageState });
             } else {
-              if (responseMsg.name !== this.state.sender) {
+              if (responseMsg.name !== this.state.name) {
                 this.setState({ messageContent: responseMsg.update });
               }
               this.setState({ msgState: responseMsg.messageState });
@@ -63,7 +61,6 @@ export default class SocialBar extends React.Component {
     for (const usr_act of this.state.userActivity) {
       responseCollection += usr_act;
     }
-    console.log("this is responseCollection");
     return responseCollection;
   }
 
@@ -94,7 +91,7 @@ export default class SocialBar extends React.Component {
 
   updateText = (txt) => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const serverTxt = { name: this.state.sender, update: txt, messageState: this.state.msgState };
+    const serverTxt = { name: this.state.name, update: txt, messageState: this.state.msgState };
     if (client.readyState === client.OPEN) {
       client.send(JSON.stringify(serverTxt));
     } else {

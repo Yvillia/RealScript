@@ -73,22 +73,12 @@ wsServer.on("request", function (request) {
     );
 
   connection.on("message", function (message) {
-    console.log("this is message: ");
-    console.log(message);
     if (message.type === "utf8") {
       console.log("Received Message: " + message.utf8Data);
       const dataFromClient = JSON.parse(message.utf8Data);
-      console.log(dataFromClient.username);
-      console.log(dataFromClient.type);
       const json = {"type": dataFromClient.type}
       if (dataFromClient.type === typesDef.USER_EVENT) {
-        console.log("New user join the server: ");
-        console.log(dataFromClient);
         users[userID] = dataFromClient;
-        console.log("try access user name: ")
-        console.log(users[userID].username);
-        console.log("these are the users: ")
-        console.log(users);
         userActivity.push(getRandomWelcome(dataFromClient.username));
         json.data = { users, userActivity };
       } else if (dataFromClient.type === typesDef.CONTENT_CHANGE) {
@@ -109,8 +99,6 @@ wsServer.on("request", function (request) {
         }
       }
       // broadcasting message to all connected clients
-      console.log("check if json file format");
-      console.log(JSON.stringify(json));
       sendMessage(JSON.stringify(json));
     }
   });
@@ -119,11 +107,7 @@ wsServer.on("request", function (request) {
   connection.on('close', function(connection) {
     console.log((new Date()) + " Peer " + userID + " disconnected.");
     const json = { type: typesDef.USER_EVENT };
-    console.log("this is the user list:");
-    console.log(users);
-    console.log(users[userID]);
-    userActivity.push(`${users[userID].username} has left.`);
-    console.log(userActivity);
+    userActivity.push(`${users[userID].username} has left.\n`);
     json.data = { users, userActivity };
     delete clients[userID];
     delete users[userID];
