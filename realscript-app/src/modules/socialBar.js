@@ -162,6 +162,7 @@ export default class SocialBar extends React.Component {
                         }}
                       >
                         <textarea
+                          style={{ backgroundColor: darkMode, color: darkMode_text }}
                           className="chatStyle"
                           rows="8"
                           readOnly
@@ -176,6 +177,7 @@ export default class SocialBar extends React.Component {
                     <div className="chat-block">
                       <p className="chat-title">Responses:</p>
                       <textarea
+                        style={{ backgroundColor: darkMode, color: darkMode_text }}
                         className="chatStyle"
                         rows="10"
                         readOnly
