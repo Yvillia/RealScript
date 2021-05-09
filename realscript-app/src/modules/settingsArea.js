@@ -2,7 +2,7 @@ import "../assets/main.css";
 import React from "react";
 import Card from "react-bootstrap/Card";
 
-global.darkMode;
+// global.darkMode;
 
 export default class SettingsBody extends React.Component {
   constructor(props) {

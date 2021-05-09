@@ -30,8 +30,8 @@ class InformationBody extends React.Component {
         <br />
         <Card style={{ backgroundColor: darkMode }}>
           <Card.Body>
-            <Card.Title style={{ color: darkMode_text }>About</Card.Title>
-            <Card.Text style={{ color: darkMode_text }>
+            <Card.Title style={{ color: darkMode_text }}>About</Card.Title>
+            <Card.Text style={{ color: darkMode_text }}>
               This is the final project for the University of Illinois at Urbana-Champaign's
               CS296-41 course. The overall goal for the project was to focus on topics that were
               gone over in CS241, the class that CS296-41 is an honors course for.
