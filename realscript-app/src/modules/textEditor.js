@@ -16,17 +16,19 @@ class TextEditor extends React.Component {
     this.ws.onmessage = (res) => {
       try {
         const JSONmsg = JSON.parse(res.data);
-        const responseMsg = JSON.parse(JSONmsg.utf8Data);
+        if (JSONmsg.type !== "persist") {
+          const responseMsg = JSON.parse(JSONmsg.utf8Data);
 
-        if (responseMsg.update != undefined) {
-          if (responseMsg.messageState == -1) {
-            this.setState({ messageContent: responseMsg.update });
-            this.setState({ msgState: responseMsg.currMessageState });
-          } else {
-            if (responseMsg.name !== this.state.sender) {
+          if (responseMsg.update != undefined) {
+            if (responseMsg.messageState == -1) {
               this.setState({ messageContent: responseMsg.update });
+              this.setState({ msgState: responseMsg.currMessageState });
+            } else {
+              if (responseMsg.name !== this.state.sender) {
+                this.setState({ messageContent: responseMsg.update });
+              }
+              this.setState({ msgState: responseMsg.messageState });
             }
-            this.setState({ msgState: responseMsg.messageState });
           }
         }
       } catch (error) {

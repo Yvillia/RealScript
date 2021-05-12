@@ -3,6 +3,16 @@ import "../assets/main.css";
 import { w3cwebsocket } from "websocket";
 const URL = "ws://127.0.0.1:8080";
 
+function arrEquivalence(a, b) {
+  if (a == b) return true;
+  if (a == null || b == null || a.length !== b.length) return false;
+
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+
+  return true;
+}
 export default class MemberList extends React.Component {
   state = {
     user_list: []
@@ -14,12 +24,29 @@ export default class MemberList extends React.Component {
     this._isMounted = true;
     this.ws.onmessage = (event) => {
       try {
-        // on receiving a message, add it to the list of messages
         const JSONmsg = JSON.parse(event.data);
-        const receivedInfo = JSON.parse(JSONmsg.utf8Data);
-        if (receivedInfo.message !== undefined && receivedInfo.name !== "server") {
-          const usr = receivedInfo.name;
-          if (usr && usr.trim()) this.addUser(usr);
+        if (JSONmsg.type === "persist") {
+          if (!arrEquivalence(JSONmsg.persistentUser, this.state.user_list)) {
+            this.setState({ user_list: JSONmsg.persistentUser });
+          }
+        } else {
+          // on receiving a message, add it to the list of messages
+          const receivedInfo = JSON.parse(JSONmsg.utf8Data);
+
+          if (receivedInfo.persistentUser != undefined) {
+            if (!arrEquivalence(receivedInfo.persistentUser, this.state.user_list)) {
+              this.setState({ user_list: receivedInfo.persistentUser });
+            }
+          }
+
+          if (
+            receivedInfo.name !== undefined &&
+            receivedInfo.message !== undefined &&
+            receivedInfo.name !== "server"
+          ) {
+            const usr = receivedInfo.name;
+            if (usr && usr.trim()) this.addUser(usr);
+          }
         }
       } catch (error) {
         console.log(error);

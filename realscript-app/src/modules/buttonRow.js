@@ -17,7 +17,7 @@ class ButtonRow extends React.Component {
             <span className="innerRow">
               {this.renderButton("Home", "/Home")}
               {this.renderButton("Editor", "/Editor")}
-              {this.renderButton("Profile", "/Profile")}
+              {this.renderButton("Whiteboard", "/Whiteboard")}
               {this.renderButton("Settings", "/Settings")}
             </span>
           </Nav>

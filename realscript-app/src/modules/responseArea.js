@@ -3,6 +3,16 @@ import "../assets/main.css";
 import { w3cwebsocket } from "websocket";
 const URL = "ws://127.0.0.1:8080";
 
+function arrEquivalence(a, b) {
+  if (a == b) return true;
+  if (a == null || b == null || a.length !== b.length) return false;
+
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+
+  return true;
+}
 export default class ResponseArea extends React.Component {
   state = {
     msgs: []
@@ -15,11 +25,24 @@ export default class ResponseArea extends React.Component {
     this.ws.onmessage = (event) => {
       let responseInfo, JSONmsg;
       try {
-        // on receiving a message, add it to the list of messages
         JSONmsg = JSON.parse(event.data);
-        responseInfo = JSON.parse(JSONmsg.utf8Data);
-        if (responseInfo.message != undefined && responseInfo.message.trim()) {
-          this.addHistory(responseInfo.message);
+        if (JSONmsg.type === "persist") {
+          if (!arrEquivalence(JSONmsg.persistentChat, this.state.msgs)) {
+            this.setState({ msgs: JSONmsg.persistentChat });
+          }
+        } else {
+          // on receiving a message, add it to the list of messages
+          responseInfo = JSON.parse(JSONmsg.utf8Data);
+
+          if (responseInfo.persistentChat != undefined) {
+            if (!arrEquivalence(responseInfo.persistentChat, this.state.msgs)) {
+              this.setState({ msgs: responseInfo.persistentChat });
+            }
+          }
+
+          // if (responseInfo.message != undefined && responseInfo.message.trim()) {
+          //   this.addHistory(responseInfo.message);
+          // }
         }
       } catch (error) {
         console.log(error);

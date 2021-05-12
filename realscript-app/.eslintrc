@@ -12,7 +12,7 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "no-console": "warn",
+    "no-console": "off",
     "prefer-const": "error",
     "no-var": "error",
     "no-unused-expressions": "warn"
